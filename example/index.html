@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Elm DataTables Demo</title>
+    <link rel="stylesheet" type="text/css" href="node_modules/datatables.net-dt/css/jquery.dataTables.css">
+  </head>
+  <body>
+    <h1>Elm DataTables Demo</h1>
+    <div id="view"></div>
+
+    <script src="node_modules/jquery/dist/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="node_modules/datatables.net/js/jquery.dataTables.js" type="text/javascript" charset="utf-8"></script>
+    <script src="node_modules/datatables.net-select/js/dataTables.select.js" type="text/javascript" charset="utf-8"></script>
+    <script src="main.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+$(function() {
+    var node = document.getElementById("view");
+    var app = Elm.Main.embed(node);
+
+    app.ports.initDataTables.subscribe(function (config) {
+        var columns = config.columns;
+        var data = config.data;
+
+        var container = $("#dt-table");
+        container
+            .dataTable({
+                select: true,
+                columns: columns.map((name) => ({ title: name })),
+                data: data
+            })
+            .on('click', 'tr', function () {
+                var row = container.api().row(this);
+                app.ports.toElm.send(row.index());
+            });
+    });
+});
+    </script>
+  </body>
+</html>

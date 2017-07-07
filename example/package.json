@@ -1,0 +1,17 @@
+{
+  "name": "elm-datatables",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "http-server -a localhost -p 8000 -c-1"
+  },
+  "author": "",
+  "license": "BSD3",
+  "dependencies": {
+    "datatables.net": "^1.10.15",
+    "datatables.net-dt": "^1.10.15",
+    "datatables.net-select": "^1.2.2",
+    "jquery": "^3.2.1"
+  }
+}
